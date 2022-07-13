@@ -1,4 +1,13 @@
+import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 todoList = []
+database_id = os.environ.get("NOTION_DATABASE")
+notion_api = os.environ.get("NOTION_API")
+url = "https://api.notion.com/v1/pages"
 
 
 def main():
@@ -9,7 +18,32 @@ def main():
             break
         elif num == 1:
             print("할일이 무엇인가요? ")
-            todoList.append(input())
+            requests.post(
+                url,
+                json={
+                    "parent": {
+                        "type": "database_id",
+                        "database_id": f"{database_id}"
+                    },
+                    "properties": {
+                        "Name": {
+                            "title":
+                                [
+                                    {
+                                        "type": "text",
+                                        "text": {"content": f"{input()}"}
+                                    }
+                                ]
+                        }
+                    }
+                },
+                headers={
+                    "Accept": "application/json",
+                    "Notion-Version": "2022-06-28",
+                    "Content-Type": "application/json",
+                    "Authorization": f"{notion_api}"
+                }
+            )
         elif num == 2:
             for todo in todoList:
                 print(todo)
