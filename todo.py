@@ -7,7 +7,6 @@ load_dotenv()
 todoList = []
 database_id = os.environ.get("NOTION_DATABASE")
 notion_api = os.environ.get("NOTION_API")
-url = "https://api.notion.com/v1/pages"
 
 
 def main():
@@ -17,6 +16,7 @@ def main():
         if not num:
             break
         elif num == 1:
+            url = "https://api.notion.com/v1/pages"
             print("할일이 무엇인가요? ")
             requests.post(
                 url,
@@ -45,8 +45,17 @@ def main():
                 }
             )
         elif num == 2:
-            for todo in todoList:
-                print(todo)
+            url = f"https:// api.notion.com/v1/databases/{database_id}"
+            payload = {"page_size": 100}
+            headers = {
+                "Accept": "application/json",
+                "Notion-Version": "2021-08-16",
+                "Content-Type": "application/json",
+                "Authorization": f"{notion_api}"
+            }
+            response = requests.post(url, json=payload, headers=headers)
+            for result in response.json()["results"]:
+                print(result["properties"]["Name"]["title"][0]["plain_text"])
         elif num == 3:
             print("무슨일을 완료했나요?")
             todoList.remove(input())
