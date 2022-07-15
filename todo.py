@@ -70,7 +70,6 @@ def main():
             for result in response.json()["results"]:
                 if result["properties"]["Name"]["title"][0]["plain_text"] == text:
                     page_id = result["url"].split("/")[-1].split("-")[-1]
-                    print(page_id)
                     url = f"https://api.notion.com/v1/pages/{page_id}"
 
                     payload = {"archived": True}
@@ -81,7 +80,9 @@ def main():
                         "Authorization": f"{notion_api}"
                     }
 
-                    response = requests.patch(url, json=payload, headers=headers)
+                    response = requests.patch(
+                        url, json=payload, headers=headers)
+
 
 if __name__ == "__main__":
     main()
