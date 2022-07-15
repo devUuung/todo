@@ -33,4 +33,5 @@ if __name__ == "__main__":
 - 2022-07-13 콘솔버전 간단한 ToDo앱 구현
 - 2022-07-14 Todo앱 NOTION_DB 기능 추가 계획
   - 2022-07-14 NOTION_DB_CREATE 기능 구현
-  - 2022-07-15 NOTION_DBB_READ 기능 구현
+  - 2022-07-15 NOTION_DB_READ 기능 구현
+  - 2022-07-15 NOTION_DB_DELETE 기능 구현
