@@ -4,7 +4,6 @@ import os
 
 load_dotenv()
 
-todoList = []
 database_id = os.environ.get("NOTION_DATABASE")
 notion_api = os.environ.get("NOTION_API")
 
@@ -45,7 +44,7 @@ def main():
                 }
             )
         elif num == 2:
-            url = f"https:// api.notion.com/v1/databases/{database_id}"
+            url = f"https://api.notion.com/v1/databases/{database_id}/query"
             payload = {"page_size": 100}
             headers = {
                 "Accept": "application/json",
@@ -57,9 +56,32 @@ def main():
             for result in response.json()["results"]:
                 print(result["properties"]["Name"]["title"][0]["plain_text"])
         elif num == 3:
-            print("무슨일을 완료했나요?")
-            todoList.remove(input())
+            url = f"https://api.notion.com/v1/databases/{database_id}/query"
+            payload = {"page_size": 100}
+            headers = {
+                "Accept": "application/json",
+                "Notion-Version": "2021-08-16",
+                "Content-Type": "application/json",
+                "Authorization": f"{notion_api}"
+            }
+            response = requests.post(url, json=payload, headers=headers)
+            print("무슨 일을 완료했나요?")
+            text = input()
+            for result in response.json()["results"]:
+                if result["properties"]["Name"]["title"][0]["plain_text"] == text:
+                    page_id = result["url"].split("/")[-1].split("-")[-1]
+                    print(page_id)
+                    url = f"https://api.notion.com/v1/pages/{page_id}"
 
+                    payload = {"archived": True}
+                    headers = {
+                        "Accept": "application/json",
+                        "Notion-Version": "2022-06-28",
+                        "Content-Type": "application/json",
+                        "Authorization": f"{notion_api}"
+                    }
+
+                    response = requests.patch(url, json=payload, headers=headers)
 
 if __name__ == "__main__":
     main()
