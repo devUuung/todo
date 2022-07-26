@@ -1,6 +1,6 @@
 # todo
 
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/87903147/181084533-d777ae2b-b4de-4530-af0c-9cb585f08624.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/87903147/181086375-f52ecbb0-cb5f-4b67-ba21-2484186737fe.gif)
 
 # 콘솔버전 todo
 
