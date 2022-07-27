@@ -149,3 +149,4 @@ if __name__ == "__main__":
   - 2022-07-14 NOTION_DB_CREATE 기능 구현
   - 2022-07-15 NOTION_DB_READ 기능 구현
   - 2022-07-15 NOTION_DB_DELETE 기능 구현
+- 2022-07-26 Todo앱 MVC패턴화
