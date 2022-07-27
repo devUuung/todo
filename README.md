@@ -1,4 +1,4 @@
-### todo
+## todo
 
 이 프로젝트는 Notion API를 활용해 Notion의 데이터베이스를 다뤄 Todo앱을 제작하였습니다.
 
